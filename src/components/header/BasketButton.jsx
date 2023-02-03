@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ReactComponent as BasketIcon } from "../../assets/icoms/basket_icon.svg";
 
-export const BusketButton = ({ count }) => {
+export const BusketButton = ({ count, ...restProps }) => {
   return (
-    <BasketButton>
+    <BasketButton {...restProps}>
       <BasketIcon />
       <StyledTitle>Your card 7</StyledTitle>
       <StyledCounter >{count || 0}</StyledCounter>

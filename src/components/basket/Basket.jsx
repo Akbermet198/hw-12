@@ -1,35 +1,19 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { BasketContext } from "../../store/BasketContex";
 import { Modal } from "../UI/Modal";
 import { BasketItem } from "./BasketItem";
 import { TotalAmount } from "./TotalAmount";
 
-const items = [
-  {
-    title: "Sushi",
-    amount: 1,
-    price: 22.99,
-    id: "meal1",
-  },
-  // {
-  //   title: "Schnitzel",
-  //   amount: 1,
-  //   price: 16.0,
-  //   id: "meal2",
-  // },
-  // {
-  //   title: "Barbecue Burger",
-  //   amount: 1,
-  //   price: 12.99,
-  //   id: "meal3",
-  // },
-  // {
-  //   title: "Green Bowl",
-  //   amount: 1,
-  //   price: 19.99,
-  //   id: "meal4",
-  // },
-];
-const Basket = () => {
+
+
+const Basket = ({onClose}) => {
+
+  const {items} =useContext(BasketContext)
+
+  const gettotalPrice = ()=>{
+    return items.reduce((sum, {price, amount})=> sum +amount * price, 0)
+  }
   return (
     <Modal onClose={() => {}}>
       <Content>
@@ -47,7 +31,7 @@ const Basket = () => {
             })}
           </FixedHeightContainer>
         ) : null}
-        <TotalAmount price={200.5034} onClose={() => {}} onOrder={() => {}} />
+        <TotalAmount price={gettotalPrice()} onClose={onClose} onOrder={() => {}} />
       </Content>
     </Modal>
   );

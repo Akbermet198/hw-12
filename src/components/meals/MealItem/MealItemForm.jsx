@@ -1,13 +1,40 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as PlusIcon } from "../../../assets/icoms/plus.svg";
+import { BasketContext } from "../../../store/BasketContex";
 import { Button } from "../../UI/Button";
 
-export const MealItemForm = ({id}) => {
+export const MealItemForm = ({ id, title, price}) => {
+  const [amount, setAmount] = useState(1);
+  const amountChangeHandler = (event) => {
+    setAmount(+event.target.value);
+  };
+  const {addToBasket }= useContext(BasketContext)
+
+const submitHandler = (event)=>{
+  event.preventDefault()
+  const basketItem = {
+    id,
+    price,
+    title,
+    amount,
+  }
+  addToBasket(basketItem)
+}
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={submitHandler}>
       <StyledInput>
         <label htmlFor={id}>Amount</label>
-        <input type="number" min={1} defaultValue={1} max={5} id={id} />
+        <input
+          type="number"
+          min={1}
+          defaultValue={1}
+          max={5}
+          id={id}
+          onChange={amountChangeHandler}
+          value={amount}
+        />
       </StyledInput>
 
       <Button>

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { MealItemForm } from "./MealItemForm";
 
+
 const MealItem = ({ title, discription, price, id }) => {
+
+
   return (
+
     <StyledItem>
       <StyledItemInfo>
         <h4>{title}</h4>
@@ -11,7 +15,7 @@ const MealItem = ({ title, discription, price, id }) => {
         <span> ${price}</span>
       </StyledItemInfo>
 
-   <MealItemForm id={id}/>
+   <MealItemForm id={id} price={price} title ={title}/>
     </StyledItem>
   );
 };
